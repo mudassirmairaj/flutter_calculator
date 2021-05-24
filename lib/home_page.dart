@@ -1,147 +1,46 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  var num1 = 0, num2 = 0, sum = 0;
-  final TextEditingController t1 = TextEditingController(text: "0");
-  final TextEditingController t2 = TextEditingController(text: "0");
-
-  void doDivide() {
-    setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
-      sum = num1 ~/ num2;
-    });
-  }
-
-
-  void doMultiply() {
-    setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
-      sum = num1 * num2;
-    });
-  }
-
-  void clearScreen(){
-    setState(() {
-      t1.text = "0";
-      t2.text = '0';
-      num1 = 0;
-      num2 = 0;
-    });
-  }
-
-  void doSubtraction() {
-    setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
-      sum = num1 - num2;
-    });
-  }
-
-  void doAddition() {
-    setState(() {
-      num1 = int.parse(t1.text);
-      num2 = int.parse(t2.text);
-      sum = num1 + num2;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return (Scaffold(
       appBar: AppBar(
-        title: Text('Calculator App'),
         centerTitle: true,
+        title: Text('Flutter App'),
       ),
-      body: Container(
-        padding: EdgeInsets.all(40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Output: $sum',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      //Making Column widget so we divide our app into two sections.
+      //keep points
+      //By default the text take the width of its parent and card takes the width of its child , so to increase width we
+      //have to keep these widget inside that widget where we can easily adjust the size
+      //That is container
+      //double infinity take whole width.
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            child: Card(
+                elevation: 8,
+                color: Colors.indigoAccent,
+                child: Text(
+                  'Chart!',
+                  style: TextStyle(color: Colors.white,),
+                )),
+          ),
+          Card(
+            color: Colors.lightBlue,
+            child: Text(
+              'List of TX',
+              style: TextStyle( color: Colors.white),
             ),
-            TextFormField(
-              controller: t1,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: "Enter Number 1",
-                hintText: "Value 1",
-              ),
-            ),
-            TextFormField(
-              controller: t2,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  labelText: "Enter Number 2", hintText: "Value 2"),
-            ),
-            Padding(padding: EdgeInsets.only(top: 20)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MaterialButton(
-                  color: Colors.lightBlue,
-
-                  onPressed: () {
-                    doAddition();
-                  },
-                  child: Text("+"),
-                ),
-                MaterialButton(
-                  color: Colors.lightBlue,
-
-                  onPressed: () {
-                    doSubtraction();
-                  },
-                  child: Text("-"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MaterialButton(
-                  color: Colors.lightBlue,
-
-                  onPressed: () {
-                    doMultiply();
-                  },
-                  child: Text("*"),
-                ),
-                MaterialButton(
-                  color: Colors.lightBlue,
-
-                  onPressed: () {
-                    doDivide();
-                  },
-                  child: Text("/"),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  color: Colors.lightBlue,
-                  onPressed: () {
-                    clearScreen();
-                  },
-                  child: Text("clear"),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ));
   }
 }
